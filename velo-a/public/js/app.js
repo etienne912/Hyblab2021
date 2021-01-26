@@ -11,21 +11,21 @@ async function bootstrap() {
     });
 
     // Départ et arrivée: https://github.com/mapbox/mapbox-gl-directions/blob/master/API.md
-    map.addControl(
-        new MapboxDirections({
-            accessToken: mapboxgl.accessToken,
-            unit: 'metric',
-            profile: 'mapbox/cycling',
-            language: 'fr',
-            alternatives: true,
-            placeholderOrigin: 'Départ',
-            placeholderDestination: 'Arrivée',
-            controls: {
-                profileSwitcher: false
-            }
-        }),
-        'top-left'
-    );
+    let control = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        unit: 'metric',
+        profile: 'mapbox/cycling',
+        language: 'fr',
+        alternatives: true,
+        placeholderOrigin: 'Départ',
+        placeholderDestination: 'Arrivée',
+        controls: {
+            profileSwitcher: false,
+            instructions: false
+        }
+    });
+
+    document.getElementById('mapbox-controllers').appendChild(control.onAdd(map))
 
     map.addControl(
         new mapboxgl.GeolocateControl({
@@ -35,7 +35,6 @@ async function bootstrap() {
             trackUserLocation: true
         })
     )
-
     // add abris velo to the map
     abrisVeloDisplayData(mapboxgl, map);
 }
