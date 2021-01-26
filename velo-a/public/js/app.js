@@ -45,3 +45,19 @@ import('./modules/stationsVelos.mjs')
     .then((module) => {
         module.getAbrisVelos();
     });
+
+document.getElementById("input-meteo").onclick = () => {
+    document.location.href = "question.html?page=météo";
+};
+
+document.getElementById("input-pollution").onclick = () => {
+    document.location.href = "question.html?page=pollution";
+};
+
+document.getElementById("input-activite").onclick = () => {
+    document.location.href = "question.html?page=activité";
+};
+
+document.getElementById("input-vae").onclick = () => {
+    document.location.href = "question.html?page=VAE";
+};

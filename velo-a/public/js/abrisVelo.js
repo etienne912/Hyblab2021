@@ -23,6 +23,8 @@ export async function abrisVeloDisplayData(mapboxgl, map) {
 
     if (!data || !data.records || !data.records.length) return;
 
+    let openMarker = undefined;
+
     data.records.forEach((record) => {
         // create a DOM element for the marker
         const el = document.createElement("div");
@@ -31,9 +33,19 @@ export async function abrisVeloDisplayData(mapboxgl, map) {
         el.style.backgroundSize = "contain";
         el.style.width = "24px";
         el.style.height = "24px";
+        let marker;
+        el.addEventListener("click", function (event) {
+            // close the holde popup (if active)
+            if(openMarker) openMarker._popup.remove();
+            // open the popup
+            marker._popup.addTo(map)
+            openMarker = marker;
+            event.stopPropagation();
+        });
+
 
         // add marker to map
-        new mapboxgl.Marker(el)
+        marker = new mapboxgl.Marker(el)
             .setLngLat([record.fields.location[1], record.fields.location[0]])
             .setPopup(new mapboxgl.Popup().setHTML(`
             <div>
