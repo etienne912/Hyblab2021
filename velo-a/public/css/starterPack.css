@@ -35,7 +35,7 @@ input {
 	background-size:900%;
 	background-position: 100% 0;
 	animation: anim_text 1.8s;
-	animation-iteration-count: 5;
+	animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
 }
 
